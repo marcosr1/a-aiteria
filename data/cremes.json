@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "nome": "Açaí",
+    "ativo": true
+  },
+  {
+    "id": 2,
+    "nome": "Maracujá",
+    "ativo": true
+  },
+  {
+    "id": 3,
+    "nome": "Limão",
+    "ativo": true
+  },
+  {
+    "id": 4,
+    "nome": "Doce de Leite",
+    "ativo": true
+  },
+  {
+    "id": 5,
+    "nome": "Bacuri",
+    "ativo": true
+  }
+]

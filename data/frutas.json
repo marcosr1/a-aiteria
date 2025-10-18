@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "nome": "Banana",
+        "ativo": true
+    },
+    {   
+        "id": 2,
+        "nome": "Morango",
+        "ativo": true
+    },
+    {
+        "id": 3,
+        "nome": "Kiwi",
+        "ativo": true
+    },
+    {
+        "id": 4,    
+        "nome": "Uva",
+        "ativo": true
+    }
+]
