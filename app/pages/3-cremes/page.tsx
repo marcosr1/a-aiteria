@@ -43,7 +43,7 @@ export default function CremesPage() {
     });
   } else {
     if (pedido.cremes.length >= 3) {
-      toast.error("Você só pode selecionar no máximo 2 cremes!");
+      toast.error("Você só pode selecionar no máximo 3 cremes!");
       return;
     }
     setPedido({
@@ -51,9 +51,7 @@ export default function CremesPage() {
       cremes: [...pedido.cremes, nome],
     });
   }
-}
-
-
+} 
 
   function handleNext() {
     router.push("/pages/4-frutas");
@@ -69,7 +67,7 @@ export default function CremesPage() {
 
   return (
     <div className="min-h-screen p-8 flex flex-col items-center bg-gradient-to-b from-purple-500 to-white">
-      <h1 className="text-2xl font-bold mb-8 text-purple-800">Escolha até 2 cremes</h1>
+      <h1 className="text-2xl font-bold mb-8 text-purple-800">Escolha até 3 cremes</h1>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl ">
         {cremes.map((c) => (

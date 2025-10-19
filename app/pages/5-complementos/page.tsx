@@ -89,7 +89,7 @@ const toggleComplemento = (item: string) => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-6 p-4 bg-gradient-to-b from-purple-500 to-white">
       <h1 className="text-3xl font-bold text-purple-800">Escolha os complementos</h1>
-
+      <p className="text-1xl font-semibold text-purple-700 ">Pode escolher até 8 complementos</p>
       <div className="grid grid-cols-2 gap-4 w-full max-w-md">
         {complementos.map((c) => (
           <button

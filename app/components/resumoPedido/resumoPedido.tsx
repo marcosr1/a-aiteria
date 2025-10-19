@@ -6,19 +6,19 @@ export default function ResumoPedido() {
   const { pedido } = usePedido();
 
   const enviarWhatsApp = () => {
-    const numeroVendedora = "5586995460638";
+    const numeroVendedora = "5586994880067";
     const mensagem = `Olá! Gostaria de fazer um pedido:
 
-Nome: ${pedido.nome || "-"}
-Endereço: ${pedido.endereco || "-"}
-Descrição: ${pedido.descricao || "-"}
+*Nome*: ${pedido.nome || "-"}
+*Endereço*: ${pedido.endereco || "-"}
+*Descrição*: ${pedido.descricao || "-"}
 
-Tamanho: ${pedido.tamanho || "-"}
-Cremes: ${pedido.cremes.length > 0 ? pedido.cremes.join(", ") : "-"}
-Coberturas: ${pedido.cobertura.length > 0 ? pedido.cobertura.join(", ") : "-"}
-Frutas: ${pedido.frutas.length > 0 ? pedido.frutas.join(", ") : "-"}
-Complementos: ${pedido.complementos.length > 0 ? pedido.complementos.join(", ") : "-"}
-Complementos Premium: ${
+*Tamanho*: ${pedido.tamanho || "-"}
+*Cremes*: ${pedido.cremes.length > 0 ? pedido.cremes.join(", ") : "-"}
+*Coberturas*: ${pedido.cobertura.length > 0 ? pedido.cobertura.join(", ") : "-"}
+*Frutas*: ${pedido.frutas.length > 0 ? pedido.frutas.join(", ") : "-"}
+*Complementos*: ${pedido.complementos.length > 0 ? pedido.complementos.join(", ") : "-"}
+*Complementos Premium*: ${
     pedido.premium && pedido.premium.length > 0
     ? pedido.premium.map((c) => c.nome).join(", ")
     : "-"
