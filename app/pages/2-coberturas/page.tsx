@@ -57,13 +57,17 @@ export default function CoberturasPage() {
   }
 
   if (loading) {
-    return <p className="text-center mt-10 text-purple-300">Carregando coberturas...</p>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-purple-700 font-semibold">
+        Carregando Coberturas...
+      </div>
+    );
   }
 
   return (
     <main className="min-h-screen p-8 flex flex-col items-center bg-gradient-to-b from-purple-500 to-white">
-        <h1 className="text-2xl font-bold mb-2 text-purple-000">Escolha suas coberturas</h1>
-        <p className="text-left font-semibold mb-8 text-purple-200">Escolha até duas coberturas</p>
+        <h1 className="text-2xl font-bold mb-2 text-purple-800">Escolha suas coberturas</h1>
+        <p className="text-left font-semibold mb-8 text-purple-700">Escolha até duas coberturas</p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl">
             {coberturas.map((c) => (

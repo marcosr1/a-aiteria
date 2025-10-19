@@ -1,13 +1,13 @@
 [
   {
-    "nome": "Pequeno",
+    "nome": "Copo Pequeno",
     "imagem": "/pequeno.jpg",
     "descricao": "330ml",
     "preco": 12,
     "ativo": true
   },
   {
-    "nome": "Médio",
+    "nome": "Copo Médio",
     "imagem": "/medio.png",
     "descricao": "400ml",
     "preco": 16,
@@ -15,14 +15,14 @@
   },
   {
     "nome": "Bacia Grande",
-    "imagem": "/grande.png",
+    "imagem": "/bacia.png",
     "descricao": "500ml",
     "preco": 20,
     "ativo": true
   },
   {
     "nome": "Bacia Família",
-    "imagem": "/familia.png",
+    "imagem": "/baciaf.png",
     "descricao": "750ml",
     "preco": 32,
     "ativo": true

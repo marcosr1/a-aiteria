@@ -21,7 +21,12 @@
   },
   {
     "id": 5,
-    "nome": "Bacuri",
+    "nome": "Abacaxi",
+    "ativo": true
+  },
+  {
+    "id": 6,
+    "nome": "Maracujá",
     "ativo": true
   }
 ]

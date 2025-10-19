@@ -18,5 +18,10 @@
         "id": 4,    
         "nome": "Uva",
         "ativo": true
+    },
+    {
+        "id": 5,    
+        "nome": "Manga",
+        "ativo": true
     }
 ]

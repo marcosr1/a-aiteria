@@ -42,7 +42,7 @@ export default function CremesPage() {
       cremes: pedido.cremes.filter((c) => c !== nome),
     });
   } else {
-    if (pedido.cremes.length >= 2) {
+    if (pedido.cremes.length >= 3) {
       toast.error("Você só pode selecionar no máximo 2 cremes!");
       return;
     }
@@ -60,7 +60,11 @@ export default function CremesPage() {
   }
 
   if (loading) {
-    return <div className="p-4 text-center text-purple-300">Carregando cremes...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-purple-700 font-semibold">
+        Carregando Cremes...
+      </div>
+    );
   }
 
   return (

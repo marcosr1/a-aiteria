@@ -26,7 +26,7 @@ Complementos Premium: ${
 
 Total a pagar: R$ ${(
     pedido.precoCopo +
-    (pedido.premium?.reduce((total, c) => total + c.preco, 0) || 0)).toFixed(2)}`;
+    (pedido.premium?.reduce((total, c) => total + c.preco, 0) || 0) + 2).toFixed(2)}`;
   
   const url = `https://wa.me/${numeroVendedora}?text=${encodeURIComponent(mensagem)}`;
   window.open(url, "_blank");
@@ -77,10 +77,13 @@ Total a pagar: R$ ${(
           <strong>Preço do Copo:</strong>{" "}
           <span className="text-emerald-500">R${pedido.precoCopo.toFixed(2)}</span>
         </p>
-
+        <p>
+          <strong>Taxa da entrega:</strong>{" "}
+          <span className="text-emerald-500">R$ 2.00</span>
+        </p>
         <p>
           <strong>Total:</strong>{" "}
-          <span className="text-emerald-500">R${totalPedido.toFixed(2)}</span>
+          <span className="text-emerald-500">R${(totalPedido + 2).toFixed(2)}</span>
         </p>
       </div>
       <div className="text-lg bg-white p-8 rounded-lg shadow-md w-full max-w-md text-black">

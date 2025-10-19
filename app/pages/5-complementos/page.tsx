@@ -3,6 +3,7 @@
 import { usePedido } from "../../context/PedidoContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 interface Complemento {
   id: number;
@@ -46,11 +47,19 @@ export default function ComplementosPage() {
     fetchComplementos();
   }, [pedido.premium]);
 
-  const toggleComplemento = (item: string) => {
-    setSelecionados((prev) =>
-      prev.includes(item) ? prev.filter((c) => c !== item) : [...prev, item]
-    );
-  };
+const toggleComplemento = (item: string) => {
+  if (selecionados.includes(item)) {
+    setSelecionados((prev) => prev.filter((c) => c !== item));
+    return;
+  }
+
+  if (selecionados.length >= 8) {
+    toast.error("Você só pode selecionar até 8 complementos!");
+    return;
+  }
+
+  setSelecionados((prev) => [...prev, item]);
+};
 
   const toggleComplementoPremium = (item: ComplementoPremium) => {
   setSelecionadosPremium((prev) =>
@@ -111,7 +120,7 @@ export default function ComplementosPage() {
                   : "border-purple-600 bg-white hover:border-purple-100 hover:bg-purple-300 "
               }`}>
             <span className="font-semibold text-gray-800">{c.nome}</span>
-            <span className="font-semibold text-gray-800">R$ {c.preco},00</span>
+            <span className={`font-semibold ${selecionadosPremium.some((p) => p.id === c.id) ? "text-emerald-500" : "text-purple-500" }`}>R$ {c.preco},00</span>
           </button>
         ))}
       </div>
@@ -134,6 +143,15 @@ export default function ComplementosPage() {
           Próximo
         </button>
       </div>
+
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          duration: 2000,
+          style: { fontSize: "14px" },
+        }}
+      />
     </div>
   );
 }

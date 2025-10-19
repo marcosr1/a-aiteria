@@ -45,7 +45,11 @@ function handleNext() {
   }
 
   if (loading) {
-    return <p className="text-center mt-10 text-purple-300">Carregando coberturas...</p>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-purple-700 font-semibold">
+        Carregando Tamanhos...
+      </div>
+    );
   }
 
   return (
@@ -56,21 +60,21 @@ function handleNext() {
         {tamanhos.map((t) => (
           <button
             key={t.nome}
-            className={`p-6 rounded-lg border-2 text-lg font-semibold transition-all 
+            className={`p-6 rounded-lg border-2 text-lg flex flex-col items-center font-semibold transition-all 
               ${pedido.tamanho === t.nome
-                ? "border-purple-100 bg-purple-500 " 
+                ? "border-purple-100 bg-purple-500" 
                 : "border-purple-600 hover:border-purple-100 hover:bg-purple-300"}`}
-            onClick={() => handleSelect(t)}
-          >
-            <Image
-              src={t.imagem}
-              alt={t.nome}
-              width={500}
-              height={400}
-              className="w-full h-auto"
-            />
-            <span className={`text-lg font-semilight ${pedido.tamanho === t.nome ? "text-white" : "text-purple-500" }`}>{t.descricao}</span><br></br>
-            <span className={`text-lg text-1x1 font-semilight ${pedido.tamanho === t.nome ? "text-white" : "text-purple-500" }`}>{t.nome}</span><br></br>
+            onClick={() => handleSelect(t)}>
+            <div className="relative w-35 h-43 rounded-2xl overflow-hidden shadow-lg flex items-center justify-center mb-0">
+              <Image
+                src={t.imagem}
+                alt={t.nome}
+                fill
+                className="w-full h-auto object-cover object-[50%_40%] scale-95"
+              />
+            </div>
+            <span className={`text-lg font-semilight ${pedido.tamanho === t.nome ? "text-white" : "text-purple-500" }`}>{t.descricao}</span>
+            <span className={`text-lg text-1x1 font-semilight whitespace-nowrap ${pedido.tamanho === t.nome ? "text-white" : "text-purple-500" }`}>{t.nome}</span>
             <span className={`text-lg font-semilight ${pedido.tamanho === t.nome ? "text-emerald-500" : "text-purple-500" }`}> R$ {t.preco},00</span>
           </button>
         ))}

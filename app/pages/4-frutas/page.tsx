@@ -36,26 +36,36 @@ export default function FrutasPage() {
     fetchFrutas();
   }, []);
 
-  function toggleFruta(nome: string) {
-    if (pedido.frutas.includes(nome)) {
-      setPedido({
-        ...pedido,
-        frutas: pedido.frutas.filter((f) => f !== nome),
-      });
-    } else {
-      setPedido({
-        ...pedido,
-        frutas: [...pedido.frutas, nome],
-      });
-    }
+function toggleFruta(nome: string) {
+  if (pedido.frutas.includes(nome)) {
+    setPedido({
+      ...pedido,
+      frutas: pedido.frutas.filter((f) => f !== nome),
+    });
+    return;
   }
+
+  if (pedido.frutas.length >= 2) {
+    toast.error("Você só pode selecionar até 2 frutas!");
+    return;
+  }
+
+  setPedido({
+    ...pedido,
+    frutas: [...pedido.frutas, nome],
+  });
+}
 
   function handleNext() {
     router.push("/pages/5-complementos");
   }
 
   if (loading) {
-    return <div className="p-4 text-center text-purple-300">Carregando frutas...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-purple-700 font-semibold">
+        Carregando Frutas...
+      </div>
+    );
   }
 
   return (

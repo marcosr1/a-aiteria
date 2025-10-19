@@ -48,5 +48,15 @@
     "id": 10,
     "nome": "Gotas de chocolate",
     "ativo": true
+  },
+  {
+    "id": 11,
+    "nome": "Mms",
+    "ativo": true
+  },
+  {
+    "id": 12,
+    "nome": "Flocos de Tapioca",
+    "ativo": true
   }
 ]
