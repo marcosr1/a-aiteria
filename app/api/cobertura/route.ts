@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
-import path from "path";
-import { atualizarItemGitHub } from "@/lib/githubUtils";
+import path from "path"; 
 
 const filePath = path.join(process.cwd(), "data", "coberturas.json");
 
@@ -13,7 +12,11 @@ interface Cobertura {
 function readData() {
   const data = fs.readFileSync(filePath, "utf-8");
   return JSON.parse(data);
-} 
+}
+
+function writeData(data: Cobertura[]) {
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+}
 
 export async function GET() {
   const coberturas = readData();
@@ -21,12 +24,21 @@ export async function GET() {
 }
 
 export async function PUT(req: Request) {
-  const { nome, ativo } = await req.json();
-  const result = await atualizarItemGitHub("coberturas", nome, ativo);
+  try {
+    const { nome, ativo } = await req.json();
+    const coberturas = readData();
+    const index = coberturas.findIndex((c: Cobertura) => c.nome === nome);
 
-  if (result.error) {
-    return NextResponse.json({ error: result.error }, { status: result.status });
+    if (index === -1) {
+      return NextResponse.json({ error: "Cobertura não encontrada" }, { status: 404 });
+    }
+
+    coberturas[index].ativo = ativo;
+    writeData(coberturas);
+
+    return NextResponse.json({ message: "Cobertura atualizada com sucesso!", coberturas });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "Erro ao atualizar cobertura" }, { status: 500 });
   }
-
-  return NextResponse.json(result);
 }
