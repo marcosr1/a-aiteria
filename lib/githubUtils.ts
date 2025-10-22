@@ -3,6 +3,11 @@
 const owner = process.env.GITHUB_OWNER!;
 const repo = process.env.GITHUB_REPO!;
 
+interface Item {
+  nome: string;
+  ativo: boolean;
+}
+
 export async function atualizarItemGitHub(tipo: string, nome: string, ativo: boolean) {
   const path = `data/${tipo}.json`;
 
@@ -25,7 +30,7 @@ export async function atualizarItemGitHub(tipo: string, nome: string, ativo: boo
   const json = JSON.parse(content);
 
   // 3. Atualizar o item
-  const index = json.findIndex((i: any) => i.nome === nome);
+  const index = json.findIndex((i: Item) => i.nome === nome);
   if (index === -1) return { error: "Item não encontrado", status: 404 };
 
   json[index].ativo = ativo;
