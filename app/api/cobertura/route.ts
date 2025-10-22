@@ -4,7 +4,12 @@ import path from "path";
 import { atualizarItemGitHub } from "@/lib/githubUtils";
 
 const filePath = path.join(process.cwd(), "data", "coberturas.json");
- 
+
+interface Cobertura {
+  nome: string;
+  ativo: boolean;
+}
+
 function readData() {
   const data = fs.readFileSync(filePath, "utf-8");
   return JSON.parse(data);
