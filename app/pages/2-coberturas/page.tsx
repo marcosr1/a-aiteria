@@ -20,7 +20,7 @@ export default function CoberturasPage() {
   useEffect(() => {
     async function carregarCoberturas() {
       try {
-        const res = await fetch("/api/cobertura");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/coberturas/`);
         if (!res.ok) throw new Error("Erro ao carregar coberturas");
         const data = await res.json();
         setCoberturas(data.filter((c: Cobertura) => c.ativo));

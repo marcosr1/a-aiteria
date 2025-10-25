@@ -30,8 +30,8 @@ export default function ComplementosPage() {
   useEffect(() => {
     const fetchComplementos = async () => {
       try {
-        const res = await fetch("/api/complementos");
-        const res1 = await fetch("/api/complementosPremium");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/complementos/`);
+        const res1 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/complementosPremium/`);
         if (!res.ok && !res1.ok) throw new Error("Erro ao carregar complementos");
         const data = await res.json();
         const data1 = await res1.json();

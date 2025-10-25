@@ -11,10 +11,10 @@ interface Item {
 
 export default function DashboardPage() {
   const router = useRouter();
-  const [aba, setAba] = useState("cobertura");
+  const [aba, setAba] = useState("coberturas");
   const [itens, setItens] = useState<Item[]>([]);
   const categorias = [
-    "cobertura",
+    "coberturas",
     "cremes",
     "frutas",
     "complementos",
@@ -47,29 +47,41 @@ export default function DashboardPage() {
     verificarAutenticacao();
   }, [verificarAutenticacao]);
 
-  async function carregarItens(tipo: string) {
+  async function carregarItens(tipo: string, retries = 3) {
+  for (let i = 0; i < retries; i++) {
     try {
-      const res = await fetch(`/api/${tipo}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${tipo}/`);
+      if (!res.ok) throw new Error("Falha na requisição");
       const data = await res.json();
       setItens(data);
+      return;
     } catch (e) {
-      console.error("Erro ao carregar itens:", e);
+      console.warn(`Tentativa ${i + 1} falhou:`, e);
+      await new Promise(r => setTimeout(r, 500));
     }
   }
+}
 
-  async function alternarAtivo(tipo: string, nome: string, ativo: boolean) {
+  async function alternarAtivo(tipo: string, id: number, ativo: boolean) {
   try {
-    await fetch(`/api/${tipo}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${tipo}/${id}/ativo`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nome, ativo: !ativo }),
+      body: JSON.stringify({ ativo: !ativo }),
     });
 
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Erro ao atualizar ${tipo}: ${errorText}`);
+    }
+
     carregarItens(tipo);
+
   } catch (e) {
     console.error("Erro ao atualizar item:", e);
   }
 }
+
   function logout() {
     localStorage.removeItem("logado");
     router.push("/dashboard/login");
@@ -79,7 +91,7 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-purple-50 p-6">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-purple-700">
-          Painel de Controle – Açaiteria 🍧
+          Painel de Controle – Imperio Açaí
         </h1>
         <button
           onClick={logout}
@@ -112,7 +124,7 @@ export default function DashboardPage() {
               className="flex justify-between items-center border-b py-3">
               <p className="font-semibold text-purple-500">{item.nome}</p>
               <button
-                onClick={() => alternarAtivo(aba, item.nome, item.ativo)}
+                onClick={() => alternarAtivo(aba, item.id, item.ativo)}
                 className={`px-4 py-2 rounded font-semibold transition ${
                   item.ativo
                     ? "bg-green-500 text-white hover:bg-green-600"

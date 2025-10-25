@@ -6,7 +6,7 @@ export default function ResumoPedido() {
   const { pedido } = usePedido();
 
   const enviarWhatsApp = () => {
-    const numeroVendedora = "5586994880067";
+    const numeroVendedora = process.env.NEXT_PUBLIC_WHATSAPP_NUMERO!;
     const mensagem = `Olá! Gostaria de fazer um pedido:
 
 *Nome*: ${pedido.nome || "-"}
@@ -24,9 +24,7 @@ export default function ResumoPedido() {
     : "-"
     }
 
-Total a pagar: R$ ${(
-    pedido.precoCopo +
-    (pedido.premium?.reduce((total, c) => total + c.preco, 0) || 0) + 2).toFixed(2)}`;
+Total a pagar: R$ ${(totalPedido + 2).toFixed(2)}`;
   
   const url = `https://wa.me/${numeroVendedora}?text=${encodeURIComponent(mensagem)}`;
   window.open(url, "_blank");

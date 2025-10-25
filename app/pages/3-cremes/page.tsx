@@ -19,7 +19,7 @@ export default function CremesPage() {
 
   async function fetchCremes() {
     try {
-      const res = await fetch("/api/cremes");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cremes/`);
       if (!res.ok) throw new Error("Erro ao carregar os cremes");
       const data: Cremes[] = await res.json();
       setCremes(data.filter((c: Cremes) => c.ativo));

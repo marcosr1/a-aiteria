@@ -20,7 +20,7 @@ export default function FrutasPage() {
 
   async function fetchFrutas() {
     try {
-      const res = await fetch("/api/frutas");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/frutas/`);
       if (!res.ok) throw new Error("Erro ao carregar as frutas");
       const data: Frutas[] = await res.json();
       setFrutas(data.filter((f) => f.ativo));

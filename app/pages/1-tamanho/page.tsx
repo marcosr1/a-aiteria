@@ -22,7 +22,7 @@ export default function TamanhoPage() {
   useEffect(() => {
     async function fetchTamanhos() {
       try {
-        const res = await fetch("/api/tamanhos");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tamanhos/`);
         if (!res.ok) throw new Error("Erro ao carregar os tamanhos");
         const data: Tamanho[] = await res.json();
         setTamanhos(data.filter((t) => t.ativo));
